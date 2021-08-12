@@ -98,7 +98,10 @@ export default {
         onComplete:function(){
           document.querySelector(".headline.cover.one-and-only").classList.remove('activate-this');
           gsap.to('.sun_will_animate',0.5,{ width:'100%', height:'100%', ease: Power2.easeOut});
-        }
+          let video = document.getElementById("the_benchmark");
+          let video_height = video.clientHeight;
+          document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+          }
       });
     }
   },

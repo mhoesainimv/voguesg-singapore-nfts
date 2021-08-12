@@ -1,28 +1,45 @@
 <template>
-  <div>
-    <div class="background-video-image desktop">
-      <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-        <source src="video/the_background_video.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
-      <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
-        <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
-        </div>
+  <div :class="'con-contained ' + view_mode">
+    <div v-if="view_mode == 'Desktop'">
+      <div class="background-video-image desktop">
+        <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
+          <source src="video/the_background_video.mp4" type="video/mp4">
+        </video>
       </div>
-      <div class="the-objects">
-        <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
-          <div class="the-description">
-            {{object.title}}
+      <div id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
+        <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+          <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
+          </div>
+        </div>
+        <div class="the-objects">
+          <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
+            <div class="the-description">
+              {{object.title}}
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-     <!-- <div class="positioning-carousel"> -->
-        <!-- <VueSlickCarousel v-bind="settings"> -->
-        <!-- </VueSlickCarousel> -->
-      <!-- </div> -->
+    <div v-if="view_mode == 'Mobile'">
+      <div class="background-video-image mobile">
+        <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
+          <source src="video/the_background_video_mobile.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div id="the_constantine" style="height:var(--the_height)" class="the-common-ground mobile">
+        <div class="positioning-carousel">
+          <client-only>
+          <VueSlickCarousel v-bind="settings">
+            <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+              <div class="background-image-slider">
+                <img style='z-index:-1;position:relative;' class="img-fluid responsive" src="images/500x600.png"/>
+              </div>
+            </div>
+          </VueSlickCarousel>
+          </client-only>
+        </div>
+      </div>
+    </div>
     <div class="modalismo" v-if="showModalcover">
       <sliderModal @motekar="oneMoreThing" :the_condition="showModalcover" :the_data="modal_content"/>
     </div>
@@ -42,7 +59,7 @@ export default {
     return{
       mobile_background:'background-image:url("images/background-positioning-mobile.png")',
       desktop_background:'background-image:url("images/background-positioning.png")',
-      view_mode:'',
+      view_mode:'Desktop',
       settings:{
         dots: false,
         arrows:false,
@@ -98,8 +115,6 @@ export default {
       // Directive interpolar changes for mobile data
         let video = document.getElementById("the_benchmark");
         let video_height = video.clientHeight;
-        setTimeout(function(){
-          },1500);
       let vh = window.innerHeight * 0.01;
       setTimeout(function(){
       document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -109,6 +124,7 @@ export default {
   },
   created:function(){
     if (process.client) {
+      this.onResize();
       let video = document.getElementById("the_benchmark");
       let video_height = video.clientHeight;
       setTimeout(function(){
@@ -118,6 +134,7 @@ export default {
   },
   mounted:function(){
     this.onResize();
+    console.log(this.view_mode);
     if(this.view_mode == 'Desktop'){
       this.$refs.this_video.play();
     }
@@ -134,159 +151,209 @@ export default {
     this.$nextTick(function () {
       window.addEventListener('resize', this.onResize);
     });
+    this.onResize();
   }
 }
 </script>
 <style lang="scss" scoped>
-  .background-video-image{
-    position:relative;
-    width:100vw;
-    height:100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
-    video{
-      position: relative;
-      width: 100%;
-      height: auto;
-      top: 50%;
-      object-fit: contain;
-      transform: translateY(-50%);
-    }
-  }
-  .the-common-ground{
-    position: absolute;
-    top: 50%;
-    left: 0px;
-    width: 100%;
-    transform: translateY(-50%);
-    height:var(--the_height);
-    height: auto;
-    background-position: bottom center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    .background-image-example{
-    position: absolute;
-    width: 50%;
-    transform: translate(-50%, -50%);
-    top: 53%;
-    left: 50%;
-    padding: 1em 1em 0.5em;
-    }
-    .positioning-carousel {
-      position: absolute;
-      width: 54%;
-      transform: translate(-50%, -50%);
-      top: 54%;
-      left: 50%;
-      padding: 1em 1em 0.5em;
-      .deck{
-        padding:0em 2em;
-        .background-image-slider {
-          z-index: -1;
-          position: relative;
-        }
-      }
-    }
-    .deck{
-      &.image-cover-0{
-        position: absolute;
-        left: 28.4%;
-        width: 17.0%;
-        top: 32%;
-        height: 45%;
-      }
-      &.image-cover-1{
-        position: absolute;
-        left: 54.3%;
-        width: 17%;
-        top: 32%;
-        height: 45%;
-      }
-      .background-image-slider{
-        background-color:rgba(128, 128, 128, 0.055);
+  .con-contained.Desktop{
+    .background-video-image{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      height: calc(var(--vh, 1vh) * 100);
+      min-height: -webkit-fill-available;
+      video{
         position: relative;
         width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position:center center;
+        height: auto;
+        top: 50%;
+        object-fit: contain;
+        transform: translateY(-50%);
       }
     }
-    .the-description {
-      position: relative;
-      left: 103%;
+    .the-common-ground{
+      position: absolute;
       top: 50%;
-      font-family:'Akzidenz-Grotesk';
+      left: 0px;
+      width: 100%;
       transform: translateY(-50%);
-      width:200px;
-      opacity:0;
-      transition:0.5s;
-      &.activate{
-        opacity:1;
-        transition:0.5s;
+      height:var(--the_height);
+      height: auto;
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      .background-image-example{
+      position: absolute;
+      width: 50%;
+      transform: translate(-50%, -50%);
+      top: 53%;
+      left: 50%;
+      padding: 1em 1em 0.5em;
       }
-    }
-    .the-objects{
-      .object{
-        &:hover{
-          .the-description{
-            opacity:1;
-            transition:0.5s;
+      .positioning-carousel {
+        position: absolute;
+        width: 54%;
+        transform: translate(-50%, -50%);
+        top: 54%;
+        left: 50%;
+        padding: 1em 1em 0.5em;
+        .deck{
+          padding:0em 2em;
+          .background-image-slider {
+            z-index: -1;
+            position: relative;
           }
         }
       }
-      .object-0{
-        position: absolute;
-        width: 13%;
-        height: 35%;
-        background-color: #00800091;
-        bottom: 4%;
-        left: 3%;
+      .deck{
+        &.image-cover-0{
+          position: absolute;
+          left: 28.4%;
+          width: 17.0%;
+          top: 32%;
+          height: 45%;
+        }
+        &.image-cover-1{
+          position: absolute;
+          left: 54.3%;
+          width: 17%;
+          top: 32%;
+          height: 45%;
+        }
+        .background-image-slider{
+          background-color:rgba(128, 128, 128, 0.055);
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background-size: cover;
+          background-position:center center;
+        }
       }
-      .object-1{
-        position: absolute;
-        width: 4.3%;
-        height: 15%;
-        background-color: rgba(0,128,0,0.56863);
-        bottom: 11%;
-        left: 22%;
-      }
-      .object-2{
-        position: absolute;
-        width: 4.3%;
-        height: 15%;
-        background-color: rgba(0, 128, 0, 0.56863);
-        bottom: 9%;
-        left: 35%;
-      }
-      .object-3{
-        position: absolute;
-        width: 4.3%;
-        height: 15%;
-        background-color: rgba(0, 128, 0, 0.56863);
-        bottom: 7%;
-        left: 61%;
-      }
-      .object-4{
-        position: absolute;
-        width: 10.3%;
-        height: 10%;
-        background-color: rgba(0, 128, 0, 0.56863);
-        bottom: 2%;
-        left: 73.3%;
-      }
-      .object-5{
-        position: absolute;
-        width: 6.3%;
-        height: 29%;
-        background-color: rgba(0, 128, 0, 0.56863);
-        bottom: 11%;
-        right: 5.5%;
-        .the-description {
+      .the-description {
         position: relative;
-        right: 225%;
-        left:auto;
+        left: 103%;
+        top: 50%;
+        font-family:'Akzidenz-Grotesk';
+        transform: translateY(-50%);
+        width:200px;
+        opacity:0;
+        transition:0.5s;
+        &.activate{
+          opacity:1;
+          transition:0.5s;
+        }
+      }
+      .the-objects{
+        .object{
+          &:hover{
+            .the-description{
+              opacity:1;
+              transition:0.5s;
+            }
+          }
+        }
+        .object-0{
+          position: absolute;
+          width: 13%;
+          height: 35%;
+          background-color: #00800091;
+          bottom: 4%;
+          left: 3%;
+        }
+        .object-1{
+          position: absolute;
+          width: 4.3%;
+          height: 15%;
+          background-color: rgba(0,128,0,0.56863);
+          bottom: 11%;
+          left: 22%;
+        }
+        .object-2{
+          position: absolute;
+          width: 4.3%;
+          height: 15%;
+          background-color: rgba(0, 128, 0, 0.56863);
+          bottom: 9%;
+          left: 35%;
+        }
+        .object-3{
+          position: absolute;
+          width: 4.3%;
+          height: 15%;
+          background-color: rgba(0, 128, 0, 0.56863);
+          bottom: 7%;
+          left: 61%;
+        }
+        .object-4{
+          position: absolute;
+          width: 10.3%;
+          height: 10%;
+          background-color: rgba(0, 128, 0, 0.56863);
+          bottom: 2%;
+          left: 73.3%;
+        }
+        .object-5{
+          position: absolute;
+          width: 6.3%;
+          height: 29%;
+          background-color: rgba(0, 128, 0, 0.56863);
+          bottom: 11%;
+          right: 5.5%;
+          .the-description {
+          position: relative;
+          right: 225%;
+          left:auto;
+          }
         }
       }
     }
   }
+  .con-contained.Mobile{
+    .background-video-image{
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: -webkit-fill-available;
+      video{
+        position: relative;
+        width: 100%;
+        height: auto;
+        top: 0%;
+        object-fit: contain;
+        transform: translateY(0);
+      }
+    }
+    .the-common-ground{
+      position: absolute;
+      top: 50%;
+      left: 0px;
+      width: 100%;
+      transform: translateY(-50%);
+      height:var(--the_height);
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      .positioning-carousel{
+        position: absolute;
+        width: 49.5%;
+        top: 24%;
+        left: 25%;
+      }
+    }
+    .background-image-slider{
+      background-color:rgba(128, 128, 128, 0.055);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position:center center;
+      img{
+        pointer-events: none;
+      }
+    }
+    .positioning-carousel {
+      height: 500px;
+    }
+  } 
 </style>

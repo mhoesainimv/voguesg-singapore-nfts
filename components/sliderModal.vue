@@ -34,7 +34,6 @@ export default {
     }
   },
   mounted:function(){
-    console.log(this.the_condition);
     if(this.the_condition == true) this.$refs['my-modal'].show();
     if (process.browser) {
     }

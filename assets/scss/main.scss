@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'Vogue';
+  src: url('../fonts/Vogue-Regular.woff2') format('woff2'),
+      url('../fonts/Vogue-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Akzidenz-Grotesk';
+  src: url('../fonts/AkzidenzGroteskPro-LightEx.woff2') format('woff2'),
+      url('../fonts/AkzidenzGroteskPro-LightEx.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Basakerville';
+  src: url('../fonts/Baskerville-Normal.woff2') format('woff2'),
+      url('../fonts/Baskerville-Normal.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Baskerville Italic';
+  src: url('../fonts/BaskervilleLight-Italic.woff2') format('woff2'),
+      url('../fonts/BaskervilleLight-Italic.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Akzidenz-Grotesk Pro Med';
+  src: url('../fonts/AkzidenzGroteskPro-MdEx.woff2') format('woff2'),
+      url('../fonts/AkzidenzGroteskPro-MdEx.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family:'Akzidenz-Grotesk'
+}
+
+p{
+  font-family:'Baskerville'
+}

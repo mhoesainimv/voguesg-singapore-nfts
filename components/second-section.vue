@@ -1,5 +1,5 @@
 <template>
-  <div :class="'con-contained '+view_mode">
+  <div>
     <div class="background-video-image desktop">
       <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
         <source src="video/the_background_video.mp4" type="video/mp4">
@@ -18,6 +18,11 @@
         </div>
       </div>
     </div>
+
+     <!-- <div class="positioning-carousel"> -->
+        <!-- <VueSlickCarousel v-bind="settings"> -->
+        <!-- </VueSlickCarousel> -->
+      <!-- </div> -->
     <div class="modalismo" v-if="showModalcover">
       <sliderModal @motekar="oneMoreThing" :the_condition="showModalcover" :the_data="modal_content"/>
     </div>
@@ -91,46 +96,40 @@ export default {
         this.view_mode = 'Desktop';
       }
       // Directive interpolar changes for mobile data
-      let video = document.getElementById("the_benchmark");
-      let video_height = video.clientHeight;
+        let video = document.getElementById("the_benchmark");
+        let video_height = video.clientHeight;
+        setTimeout(function(){
+          },1500);
       let vh = window.innerHeight * 0.01;
       setTimeout(function(){
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-        document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-      },3000);
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+          document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+      },1500);
     },
   },
   created:function(){
-    if(this.window.width < 767){
-      this.view_mode = 'Mobile';
-    } else {
-      this.view_mode = 'Desktop';
-    }
     if (process.client) {
       let video = document.getElementById("the_benchmark");
       let video_height = video.clientHeight;
       setTimeout(function(){
       document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-      },3000);
+      },1500);
     }
   },
   mounted:function(){
     this.onResize();
-    if(this.window.width < 767){
-      this.view_mode = 'Mobile';
-    } else {
-      this.view_mode = 'Desktop';
-    }
     if(this.view_mode == 'Desktop'){
       this.$refs.this_video.play();
     }
      if (process.client) {
       this.onResize();
-      let video = document.getElementById("the_benchmark");
-      let video_height = video.clientHeight;
-      setTimeout(function(){
-      document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-      },3000);
+      if(this.view_mode == 'Desktop'){
+        let video = document.getElementById("the_benchmark");
+        let video_height = video.clientHeight;
+        setTimeout(function(){
+        document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+        },1500);
+      }
     }
     this.$nextTick(function () {
       window.addEventListener('resize', this.onResize);
@@ -290,5 +289,4 @@ export default {
       }
     }
   }
-
 </style>

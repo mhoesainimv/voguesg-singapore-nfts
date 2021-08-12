@@ -1,40 +1,61 @@
 <template>
   <div>
     <div :class="'con-contained ' + view_mode">
-    <div v-if="view_mode == 'Desktop'" class="background-video-image desktop">
-      <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-        <source src="video/the_background_video.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div v-if="view_mode == 'Desktop'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
-      <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
-        <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
-        </div>
+      <div v-if="view_mode == 'Desktop'" class="background-video-image desktop">
+        <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
+          <source src="video/the_background_video.mp4" type="video/mp4">
+        </video>
       </div>
-      <div class="the-objects">
-        <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
-          <div class="the-description">
-            {{object.title}}
+      <div v-if="view_mode == 'Desktop'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
+        <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+          <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
           </div>
         </div>
-      </div>
-    </div>
-    <div v-if="view_mode == 'Mobile'" class="background-video-image mobile">
-      <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-        <source src="video/the_background_video_mobile.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div v-if="view_mode == 'Mobile'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground mobile">
-      <div class="positioning-carousel">
-        <VueSlickCarousel v-bind="settings">
-          <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
-            <div class="background-image-slider">
-              <img style='z-index:-1;position:relative;' class="img-fluid responsive" src="images/500x600.png"/>
+        <div class="the-objects">
+          <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
+            <div class="the-description">
+              {{object.title}}
             </div>
           </div>
-        </VueSlickCarousel>
+        </div>
       </div>
-    </div>
+      <div v-if="view_mode == 'Mobile'" class="background-video-image mobile" style="height:var(--the_height)">
+        <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
+          <source src="video/the_background_video_mobile.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div v-if="view_mode == 'Mobile'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground mobile">
+        <div class="positioning-carousel">
+          <VueSlickCarousel v-bind="settings">
+            <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+              <div class="background-image-slider">
+                <img style='z-index:-1;position:relative;' class="img-fluid responsive" :src="slide.image_cover"/>
+              </div>
+            </div>
+          </VueSlickCarousel>
+        </div>
+      </div>
+      <div v-if="view_mode == 'Mobile'" class="the-objects">
+        <div class="container-fluid">
+          <div class="row">
+            <div v-for="(object,index) of objects" :key="index" :class="'col-6 m-0 object the-box object-'+index+' '+object.slug">
+              <div class="row">
+                <div class="col-12">
+                  <div class="background-image-mobile-objects" :style="{ 'background-image': 'url('+ object.image_cover + ')' }">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <span class="mobile-description" style="font-family:'Baskerville;text-align:center;display:table;">
+                  {{object.title}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="modalismo" v-if="showModalcover">
       <sliderModal @motekar="oneMoreThing" :the_condition="showModalcover" :the_data="modal_content"/>
@@ -42,6 +63,7 @@
   </div>
 </template>
 <script>
+import {gsap, Power2} from "gsap"
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
@@ -124,17 +146,14 @@ export default {
     },
   },
   created:function(){
-    // if (process.client) {
-    //   this.window.width = window.innerWidth;
-    //   this.window.height = window.innerHeight;
-    //   if(this.window.width < 767){
-    //     this.view_mode = 'Mobile';
-    //   } else {
-    //     this.view_mode = 'Desktop';
-    //   }
-    // }
+    if(this.view_mode == 'Desktop' && process.client){
+      let video = document.getElementById("the_benchmark");
+      let video_height = video.clientHeight;
+      document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+    }
   },
   mounted:function(){
+    gsap.set('.positioning-carousel',{opacity:0});
     console.log(this.view_mode);
     this.onResize();
     if(this.view_mode == 'Desktop'){
@@ -324,12 +343,30 @@ export default {
         transform: translateY(0);
       }
     }
+    .the-box{
+      padding: 2em;
+      border-right: 1px solid grey;
+      border-bottom: 1px solid grey;
+      &:nth-child(even){
+        border-right:0px;
+      }
+      .background-image-mobile-objects {
+        width: 50%;
+        height: 0px;
+        padding-bottom: 50%;
+        display: table;
+        margin: 0 auto;
+        margin-bottom: 1.5em;
+        background-size: cover;
+        background-position: center center;
+      }
+    }
     .the-common-ground{
       position: absolute;
-      top: 50%;
+      top: 0%;
       left: 0px;
       width: 100%;
-      transform: translateY(-50%);
+      transform: translateY(0%);
       height:var(--the_height);
       background-position: bottom center;
       background-repeat: no-repeat;

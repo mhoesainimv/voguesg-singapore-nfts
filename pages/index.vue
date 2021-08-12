@@ -110,7 +110,7 @@ export default {
             }
             this.the_responsive = this.view_mode;
             document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-          },1000);
+          },10);
           }
       });
     }

@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="second-page">
-      <secondSection/>
+      <secondSection v-show="triggerSecondPage" :the_responsive="view_mode"/>
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@ import theSun from "~/components/the-sun.vue"
 export default {
   data(){
     return{
-      view_mode:'',
+      view_mode:'Desktop',
       triggerSecondPage: false,
       window: {
         width: 0,
@@ -58,6 +58,7 @@ export default {
   methods:{
     onResize() {
       // Directive interpolar changes for mobile data
+
       this.window.width = window.innerWidth;
       this.window.height = window.innerHeight;
       if(this.window.width < 512){
@@ -77,8 +78,9 @@ export default {
       });
     },
     triggerMeTransition(){
+      this.triggerSecondPage = true;
       var tl = gsap.timeline();
-       tl.to('.first-page', 0.9,{
+       tl.to('.first-page', 0.9,{ 
         scaleX:1, scaleY:1, opacity:1,ease: Power2.easeOut,
         onComplete:function(){
         }
@@ -98,9 +100,17 @@ export default {
         onComplete:function(){
           document.querySelector(".headline.cover.one-and-only").classList.remove('activate-this');
           gsap.to('.sun_will_animate',0.5,{ width:'100%', height:'100%', ease: Power2.easeOut});
-          let video = document.getElementById("the_benchmark");
-          let video_height = video.clientHeight;
-          document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+          setTimeout(function(){
+            let video = document.getElementById("the_benchmark");
+            let video_height = video.clientHeight;
+            if(this.window.width < 512){
+              this.view_mode = 'Mobile';
+            } else {
+              this.view_mode = 'Desktop';
+            }
+            this.the_responsive = this.view_mode;
+            document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+          },1000);
           }
       });
     }
@@ -117,7 +127,12 @@ export default {
     });
   },
   created:function(){
-
+    if (process.client) {
+      setTimeout(function(){
+        this.window.width = window.innerWidth;
+        this.window.height = window.innerHeight;
+      },1500);
+    }
   }
 }
 </script>

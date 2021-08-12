@@ -1,44 +1,40 @@
 <template>
-  <div :class="'con-contained ' + view_mode">
-    <div v-if="view_mode == 'Desktop'">
-      <div class="background-video-image desktop">
-        <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-          <source src="video/the_background_video.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
-        <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
-          <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
-          </div>
+  <div>
+    <div :class="'con-contained ' + view_mode">
+    <div v-if="view_mode == 'Desktop'" class="background-video-image desktop">
+      <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
+        <source src="video/the_background_video.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div v-if="view_mode == 'Desktop'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
+      <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+        <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
         </div>
-        <div class="the-objects">
-          <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
-            <div class="the-description">
-              {{object.title}}
-            </div>
+      </div>
+      <div class="the-objects">
+        <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
+          <div class="the-description">
+            {{object.title}}
           </div>
         </div>
       </div>
     </div>
-    <div v-if="view_mode == 'Mobile'">
-      <div class="background-video-image mobile">
-        <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-          <source src="video/the_background_video_mobile.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div id="the_constantine" style="height:var(--the_height)" class="the-common-ground mobile">
-        <div class="positioning-carousel">
-          <client-only>
-          <VueSlickCarousel v-bind="settings">
-            <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
-              <div class="background-image-slider">
-                <img style='z-index:-1;position:relative;' class="img-fluid responsive" src="images/500x600.png"/>
-              </div>
+    <div v-if="view_mode == 'Mobile'" class="background-video-image mobile">
+      <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
+        <source src="video/the_background_video_mobile.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div v-if="view_mode == 'Mobile'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground mobile">
+      <div class="positioning-carousel">
+        <VueSlickCarousel v-bind="settings">
+          <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+            <div class="background-image-slider">
+              <img style='z-index:-1;position:relative;' class="img-fluid responsive" src="images/500x600.png"/>
             </div>
-          </VueSlickCarousel>
-          </client-only>
-        </div>
+          </div>
+        </VueSlickCarousel>
       </div>
+    </div>
     </div>
     <div class="modalismo" v-if="showModalcover">
       <sliderModal @motekar="oneMoreThing" :the_condition="showModalcover" :the_data="modal_content"/>
@@ -55,7 +51,12 @@ import objects from '~/components/json/objects.json'
 import sliderModal from '~/components/sliderModal.vue'
 
 export default {
+  props: {
+    the_responsive:String,
+    the_condition:Boolean
+  },
   data(){
+
     return{
       mobile_background:'background-image:url("images/background-positioning-mobile.png")',
       desktop_background:'background-image:url("images/background-positioning.png")',
@@ -117,13 +118,29 @@ export default {
         let video_height = video.clientHeight;
       let vh = window.innerHeight * 0.01;
       setTimeout(function(){
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+          document.documentElement.style.setProperty('--vh', `${vh}px`);
           document.documentElement.style.setProperty('--the_height', `${video_height}px`);
       },1500);
     },
   },
   created:function(){
-    if (process.client) {
+    // if (process.client) {
+    //   this.window.width = window.innerWidth;
+    //   this.window.height = window.innerHeight;
+    //   if(this.window.width < 767){
+    //     this.view_mode = 'Mobile';
+    //   } else {
+    //     this.view_mode = 'Desktop';
+    //   }
+    // }
+  },
+  mounted:function(){
+    console.log(this.view_mode);
+    this.onResize();
+    if(this.view_mode == 'Desktop'){
+      this.$refs.this_video.play();
+    }
+     if (process.client) {
       this.onResize();
       let video = document.getElementById("the_benchmark");
       let video_height = video.clientHeight;
@@ -131,27 +148,10 @@ export default {
       document.documentElement.style.setProperty('--the_height', `${video_height}px`);
       },1500);
     }
-  },
-  mounted:function(){
-    this.onResize();
-    console.log(this.view_mode);
-    if(this.view_mode == 'Desktop'){
-      this.$refs.this_video.play();
-    }
-     if (process.client) {
-      this.onResize();
-      if(this.view_mode == 'Desktop'){
-        let video = document.getElementById("the_benchmark");
-        let video_height = video.clientHeight;
-        setTimeout(function(){
-        document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-        },1500);
-      }
-    }
     this.$nextTick(function () {
-      window.addEventListener('resize', this.onResize);
+      this.onResize();
     });
-    this.onResize();
+    window.addEventListener('resize', this.onResize);
   }
 }
 </script>

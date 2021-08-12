@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="'con-contained '+view_mode">
     <div class="background-video-image desktop">
       <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
         <source src="video/the_background_video.mp4" type="video/mp4">
@@ -18,11 +18,6 @@
         </div>
       </div>
     </div>
-
-     <!-- <div class="positioning-carousel"> -->
-        <!-- <VueSlickCarousel v-bind="settings"> -->
-        <!-- </VueSlickCarousel> -->
-      <!-- </div> -->
     <div class="modalismo" v-if="showModalcover">
       <sliderModal @motekar="oneMoreThing" :the_condition="showModalcover" :the_data="modal_content"/>
     </div>
@@ -102,32 +97,40 @@ export default {
       setTimeout(function(){
         document.documentElement.style.setProperty('--vh', `${vh}px`);
         document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-      },1500);
+      },3000);
     },
   },
   created:function(){
+    if(this.window.width < 767){
+      this.view_mode = 'Mobile';
+    } else {
+      this.view_mode = 'Desktop';
+    }
     if (process.client) {
       let video = document.getElementById("the_benchmark");
       let video_height = video.clientHeight;
       setTimeout(function(){
       document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-      },1500);
+      },3000);
     }
   },
   mounted:function(){
     this.onResize();
+    if(this.window.width < 767){
+      this.view_mode = 'Mobile';
+    } else {
+      this.view_mode = 'Desktop';
+    }
     if(this.view_mode == 'Desktop'){
       this.$refs.this_video.play();
     }
      if (process.client) {
       this.onResize();
-      if(this.view_mode == 'Desktop'){
-        let video = document.getElementById("the_benchmark");
-        let video_height = video.clientHeight;
-        setTimeout(function(){
-        document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-        },1500);
-      }
+      let video = document.getElementById("the_benchmark");
+      let video_height = video.clientHeight;
+      setTimeout(function(){
+      document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+      },3000);
     }
     this.$nextTick(function () {
       window.addEventListener('resize', this.onResize);
@@ -287,4 +290,5 @@ export default {
       }
     }
   }
+
 </style>

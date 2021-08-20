@@ -13,28 +13,28 @@
         </div>
         <div class="the-objects">
           <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
-            <div class="the-description">
-              {{object.title}}
+            <div class="the-description" v-html="object.title">
             </div>
           </div>
         </div>
       </div>
-      <div v-if="view_mode == 'Mobile'" class="background-video-image mobile" style="height:var(--the_height)">
+      <div v-if="view_mode == 'Mobile'" class="background-video-image mobile" style="">
         <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
           <source src="video/the_background_video_mobile.mp4" type="video/mp4">
         </video>
-      </div>
-      <div v-if="view_mode == 'Mobile'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground mobile">
-        <div class="positioning-carousel">
-          <VueSlickCarousel v-bind="settings">
-            <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
-              <div class="background-image-slider">
-                <img style='z-index:-1;position:relative;' class="img-fluid responsive" :src="slide.image_cover"/>
+        <div v-if="view_mode == 'Mobile'" id="the_constantine" style="" class="the-common-ground mobile">
+          <div class="positioning-carousel">
+            <VueSlickCarousel v-bind="settings">
+              <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+                <div class="background-image-slider">
+                  <img style='z-index:-1;position:relative;' class="img-fluid responsive" :src="slide.image_cover"/>
+                </div>
               </div>
-            </div>
-          </VueSlickCarousel>
+            </VueSlickCarousel>
+          </div>
         </div>
       </div>
+
       <div v-if="view_mode == 'Mobile'" class="the-objects">
         <div class="container-fluid">
           <div class="row">
@@ -47,8 +47,7 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <span class="mobile-description" style="font-family:'Baskerville;text-align:center;display:table;">
-                  {{object.title}}
+                  <span class="mobile-description" style="font-family:'Baskerville;text-align:center;display:table;" v-html="object.title">
                   </span>
                 </div>
               </div>
@@ -58,7 +57,7 @@
       </div>
     </div>
     <div class="modalismo" v-if="showModalcover">
-      <sliderModal @motekar="oneMoreThing" :the_condition="showModalcover" :the_data="modal_content"/>
+      <sliderModal @motekar="oneMoreThing" :the_condition="showModalcover" :the_view_mode="view_mode" :the_data="modal_content"/>
     </div>
   </div>
 </template>
@@ -181,7 +180,7 @@ export default {
       width:100vw;
       height:100vh;
       height: calc(var(--vh, 1vh) * 100);
-      min-height: -webkit-fill-available;
+      // min-height: -webkit-fill-available;
       video{
         position: relative;
         width: 100%;
@@ -241,7 +240,9 @@ export default {
           height: 45%;
         }
         .background-image-slider{
+          background-image:none !important;
           background-color:rgba(128, 128, 128, 0.055);
+          background-color: rgb(255 143 241 / 80%);
           position: relative;
           width: 100%;
           height: 100%;
@@ -264,6 +265,7 @@ export default {
         }
       }
       .the-objects{
+        background-color:#f3eeec;
         .object{
           &:hover{
             .the-description{
@@ -291,7 +293,7 @@ export default {
         .object-2{
           position: absolute;
           width: 4.3%;
-          height: 15%;
+          height: 17%;
           background-color: rgba(0, 128, 0, 0.56863);
           bottom: 9%;
           left: 35%;
@@ -329,11 +331,20 @@ export default {
     }
   }
   .con-contained.Mobile{
+    .the-objects{
+      background-color: #f3eeec;
+      span.mobile-description {
+        font-size: 0.6em;
+      }
+    }
     .background-video-image{
       position: relative;
       width: 100%;
       height: auto;
-      min-height: -webkit-fill-available;
+      position: relative;
+      width: 100%;
+      height: 0px;
+      padding-bottom: 148%;
       video{
         position: relative;
         width: 100%;
@@ -367,7 +378,9 @@ export default {
       left: 0px;
       width: 100%;
       transform: translateY(0%);
-      height:var(--the_height);
+      // height:var(--the_height);
+      height:0px;
+      padding-bottom:148%;
       background-position: bottom center;
       background-repeat: no-repeat;
       background-size: cover;

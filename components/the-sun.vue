@@ -1,6 +1,6 @@
 <template>
   <div class="sun">
-    <div id="ultimate_ray_box" class="ray_box">
+    <!-- <div id="ultimate_ray_box" class="ray_box">
       <div class="contained_rays">
         <div class="ray ray1"></div>
         <div class="ray ray2"></div>
@@ -13,7 +13,7 @@
         <div class="ray ray9"></div>
         <div class="ray ray10"></div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -34,18 +34,21 @@ export default {
     border-radius:50%;	
     background:#fff;
     opacity:1;			
-    box-shadow: 0px 0px 40px 15px rgb(255, 255, 200),
-    0 0 100px 50px #ff0;  
-    // box-shadow:0px 0px 43px 43px #ffff84;
-    // box-shadow: 
-    // 0 0 40px 20px #fff, 
-    // 0 0 100px 50px #ff0;
-    // background-image: gradient(circle 150px at 25% 33%, white, yellow, lightyellow, aqua);
-    box-shadow:
-    0 0 50px 30px #fff,  
-    0 0 100px 150px #ff0,
-    0 0 100px 165px rgb(255, 123, 0), 
-    0 0 100px 200px #fff;  
+    z-index:5;
+    // box-shadow: 0px 0px 40px 15px rgb(255, 255, 200),
+    // 0 0 100px 50px #ff0;  
+    // // box-shadow:0px 0px 43px 43px #ffff84;
+    // // box-shadow: 
+    // // 0 0 40px 20px #fff, 
+    // // 0 0 100px 50px #ff0;
+    // // background-image: gradient(circle 150px at 25% 33%, white, yellow, lightyellow, aqua);
+    // box-shadow:
+    // 0 0 50px 30px #fff,  
+    // 0 0 100px 150px #ff0,
+    // 0 0 100px 165px rgb(255, 123, 0), 
+    // 0 0 100px 200px #fff;  
+    // box-shadow: 0 0 50px 30px #fff, 0 0 100px 150px #fff0, 0 0 100px 165px #ffffff, 0 0 100px 200px #fff0;
+    box-shadow:0 0 70px 10px #fff, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #ffffff, 0 0 50px 100px rgb(255 255 255 / 0%);;
     &.activate{
     // box-shadow: 0px 0px 200px 60px yellow;  
       box-shadow: 0 0 40px 20px #fff, 0 0 100px 50px rgb(255, 174, 0);

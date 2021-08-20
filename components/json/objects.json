@@ -2,49 +2,49 @@
   {
     "id": "0",
     "slug":"pillar",
-    "title":"Lorem ipsum dolor sit amet 0",
+    "title":"<i>Vogue</i> conversations: What is the value of fashion NFTs?",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/800x800.png",
-    "link" : "#"
+    "link" : "https://vogue.sg/vogue-conversations-nft/"
   },
   {
     "id": "1",
     "slug":"candle",
-    "title":"Lorem ipsum dolor sit amet 1",
+    "title":"Discover the Balmain digital-only dress created exclusively for <i>Vogue</i> Singapore",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/800x800.png",
-    "link" : "#"
+    "link" : "https://vogue.sg/balmain-nft/"
   },
   {
     "id": "2",
     "slug":"vase",
-    "title":"Lorem ipsum dolor sit amet 2",
+    "title":"Explore an eternal flowering vase that blooms with each sunrise",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/800x800.png",
-    "link" : "#"
+    "link" : "https://vogue.sg/lanzavecchia-wai-nft/"
   },
   {
     "id": "3",
     "slug":"thread_needle",
-    "title":"Lorem ipsum dolor sit amet 3",
+    "title":"Try on the digital headdress created by The Fabricant",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/800x800.png",
-    "link" : "#"
+    "link" : "https://vogue.sg/the-fabricant-instagram-filter/"
   },
   {
     "id": "4",
     "slug":"canvas",
-    "title":"Lorem ipsum dolor sit amet 4",
+    "title":"Watch artist Dain Yoon transform herself with surreal make-up",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/800x800.png",
-    "link" : "#"
+    "link" : "https://vogue.sg/dain-yoon-nft/"
   },
   {
     "id": "5",
     "slug":"violin",
-    "title":"Lorem ipsum dolor sit amet 5",
+    "title":"48 local performers create a bespoke piece of work for Vogue Singapore inspired by our 'New Beginnings' theme",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/800x800.png",
-    "link" : "#"
+    "link" : "https://vogue.sg/rhythm-of-singapore/"
   }
 ]

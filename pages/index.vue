@@ -1,27 +1,39 @@
 <template>
-  <div class='the-contained'>
+  <div id="45_nods_" :class="'the-contained '+ view_mode">
+    <div id="first-introismo" class="the-intro">
+      <div class="position-absolute">
+        <div class="the-intro-text first">A new dawn for fashion lies in technology</div>
+      </div>
+      <div class="position-absolute">
+        <div class="the-intro-text second">Enter the metaverse</div>
+      </div>
+    </div>
     <div class="first-page">
-      <div class="container">
-        <div class=" bornga row align-content-center justify-content-center">
-          <div class="col-md-8 text-center">
-            <h3 class="bolder">New Beginnings</h3>
-          </div>
-        </div>
-        <div class=" bornga row align-content-center justify-content-center my-3">
-          <div class="col-md-8 text-center">
-            <p class="description-head">
-              We are working with NFT and digital artists to create a series of covers in line with the global September theme of ‘New Beginnings’ to explore the intersection of fashion and technology—the dawn of fashion in the metaverse—as Singapore is a hub for innovation.
-            </p>
-          </div>
-        </div>
-        <div class=" bornga row">
-          <div class="col-xl-4 col-lg-4 col-md-3 col-sm-6 mx-auto d-table text-center">
-            <div class="headline cover one-and-only" style="position:relative;overflow:hidden;background-image:url('images/static-cover.jpg');>">
-              <theSun id='the-brightness' class="sun_will_animate" />
+      <div id="45_nods_1" class="container">
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-3 col-sm-6 mt-4 mx-auto d-table text-center">
+            <div class="headline cover one-and-only" style="position:relative;">
+              <div class="video first-headline">
+                <video id="the_first_video" ref="the_first_video" playsinline muted>
+                  <source src="video/VOGUE_NFT_COVER_SHINE_FLOW.mp4" type="video/mp4">
+                </video>
+                <theSun id='the-brightness' class="sun_will_animate" />
+              </div>
+              <div class="the-text-new-beginning bornga">New Beginnings</div>
             </div>
           </div>
         </div>
-        <div class=" bornga row mt-5 align-content-center justify-content-center">
+        <div class=" bornga row mt-4 align-content-center justify-content-center mb-2">
+          <div class="col-md-10 text-center">
+            <p class="description-head">
+              As part of the global theme of 'New Beginnings' for September, <i>Vogue</i> Singapore explores the creative renaissance born out of digital innovation with an issue dedicated to Non-Fungible Tokens (NFTs). 
+            </p>
+            <p class="description-head">
+              Enter our fashion metaverse to discover two virtual-only covers—available for purchase as one-of-one NFTs—created in collaboration with two teams of local and international digital artists.
+            </p>
+          </div>
+        </div>
+        <div class=" bornga row align-content-center justify-content-center">
           <div class="col-md-6 d-table mx-auto entry">
             <button @click="triggerMeTransition()" class=" d-table mx-auto click-me-to-enter">
               Enter
@@ -37,7 +49,7 @@
 </template>
 
 <script>
-import {gsap, Power2} from "gsap";
+import {gsap, Power2,Power4,Power3} from "gsap";
 import secondSection from "~/components/second-section.vue"
 import theSun from "~/components/the-sun.vue"
 
@@ -49,7 +61,8 @@ export default {
       window: {
         width: 0,
         height: 0
-      }
+      },
+      view_mode : 'Desktop'
     }
   },
   components: {
@@ -69,34 +82,68 @@ export default {
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     },
-    welcomeEntry(){
+    firstIntro(){
+      let video = document.getElementById("the_first_video");
       var tl = gsap.timeline();
+      tl.to('.the-intro-text.first',{
+        opacity:1,
+        onComplete:function(){
+        }
+      },1);
+      tl.to('.the-intro-text.first',{
+        opacity:0,
+        onComplete:function(){
+        }
+      },2);
+      tl.to('.the-intro-text.second',{
+        opacity:1,
+        onComplete:function(){
+        }
+      },3);
+      tl.to('.the-intro-text.second',{
+        opacity:0,
+        onComplete:function(){
+        }
+      },5);
+      tl.to('.the-intro',{
+        opacity:0,
+        onComplete:function(){
+          document.getElementById('first-introismo').style.zIndex = "-1";
+          video.play();
+          setTimeout(function(){
+            video.pause();
+          },2000);
+        }
+      },6);
       tl.to('.first-page .bornga', {
         opacity: 1,
-        stagger: 0.3,
-        y:0
-      });
+        stagger: 0.5,
+        y:0,
+        onComplete:function(){
+        }
+      },7);
     },
     triggerMeTransition(){
+      let video = document.getElementById("the_first_video");
+      video.play();
       this.triggerSecondPage = true;
       var tl = gsap.timeline();
-       tl.to('.first-page', 0.9,{ 
-        scaleX:1, scaleY:1, opacity:1,ease: Power2.easeOut,
+      tl.to('.first-page', 2,{
+        scaleX:10, scaleY:10, opacity:1,ease: Power3.easeIn,
+        onStart:function(){
+          document.getElementById('45_nods_1').classList.add('change_background');
+          // document.getElementById('45_nods').classList.add('change_background');
+        },
         onComplete:function(){
-        }
-      });
-      tl.to('.first-page', 0.7,{
-        scaleX:3, scaleY:3, opacity:0,ease: Power2.easeOut,
-        onComplete:function(){
-          document.getElementById("the-brightness").classList.add('activate');
+          // document.getElementById("the-brightness").classList.add('activate');
           gsap.set('.first-page',{ opacity:0, scaleX:0, scaleY:0});
-          gsap.to('.second-page',0.5,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
+          gsap.to('.second-page',1,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
         }
       });
-      var tl2 = gsap.timeline();
+      var tl2 = gsap.timeline().delay(0.4);
       document.querySelector(".headline.cover.one-and-only").classList.add('activate-this');
-      tl2.to('.sun_will_animate',0.9,{
-        opacity:1,scaleX:9, scaleY:9, ease: Power2.easeOut,
+      tl2.to('.sun_will_animate',2,{
+        opacity:1,scaleX:12, scaleY:12, ease: Power2.easeOut,
         onComplete:function(){
           document.querySelector(".headline.cover.one-and-only").classList.remove('activate-this');
           gsap.to('.sun_will_animate',0.5,{ width:'100%', height:'100%', ease: Power2.easeOut});
@@ -117,13 +164,21 @@ export default {
   },
   mounted:function(){
     gsap.set('.sun_will_animate',{ opacity:1,scaleX:0,scaleY:0});
-    gsap.set('.first-page .bornga',{ opacity:0, y:'-10px'});
+    gsap.set('.first-page .row.bornga',{ opacity:0, y:'-10px'});
     gsap.set('.second-page',{ opacity:0, scaleX:1.2, scaleY:1.2});
-    this.welcomeEntry();
+    // this.welcomeEntry();
+    this.firstIntro();
     if (process.browser) {
     }
     this.$nextTick(function () {
+      let video = document.getElementById("the_first_video");
       window.addEventListener('resize', this.onResize);
+      // video.addEventListener("timeupdate", function(){
+      //   if(this.currentTime >= 1.9) {
+      //     console.log('hello');
+      //     this.pause();
+      //   }
+      // });
     });
   },
   created:function(){
@@ -139,19 +194,71 @@ export default {
 
 <style lang="scss" scoped>
   .the-contained{
+    background-color:#f3eeec;
+    width:100%;
+    height:100vh;
+    min-height: -webkit-fill-available;
     @media all and (min-width:512px){
       overflow:hidden !important;
+      height:100%;
+      height:100vh;
+      height: calc(var(--vh, 1vh) * 100);
+    }
+    &.change_background{
+      background-color:#fff;
+      transition:1s;
+    }
+  }
+  .the-intro{
+    position:absolute;
+    z-index:56;
+    width: 100vw;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    min-height: -webkit-fill-available;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    // background: linear-gradient(182deg, #66a0d0, #f1bd7b);
+    background: rgb(102,160,208);
+    background: linear-gradient(180deg, rgba(102,160,208,1) 0%, rgba(241,189,123,1) 100%);
+    background-size: 300% 300%;
+    -webkit-animation: ShiftingGradient 8s ease infinite;
+    -moz-animation: ShiftingGradient 8s ease infinite;
+    -o-animation: ShiftingGradient 8s ease infinite;
+    animation: ShiftingGradient 8s ease infinite;
+    .the-intro-text{
+      opacity:0;
+      font-family: 'Akzidenz-Grotesk';
+      font-size: 1.3em;
+      @media all and (max-width:512px){
+        font-size: 0.7em;
+        text-align: center;
+        display: table;
+      }
     }
   }
   .first-page{
-    // background-image:repeating-conic-gradient(from 0 at 50% 50%, rgba(56, 28, 28, 0.7) 0% 5deg, transparent 0 9deg),
-    // radial-gradient(
-    //   circle 150px at 50% 50%,
-    //   white,
-    //   yellow,
-    //   lightyellow,
-    //   rgba(46, 181, 229, 0.8)
-    // );
+    background-color:#f3eeec;
+    video#the_first_video {
+      width: 100%;
+      height:auto;
+    }
+    &.change_background{
+      background-color:#fff;
+      transition:1s;
+    }
+    .the-text-new-beginning.bornga{
+      font-family: "Akzidenz-Grotesk";
+      position: absolute;
+      top: 19.75%;
+      left: 2.3%;
+      font-size: 77%;
+      text-transform: uppercase;
+      opacity:0;
+    }
     .row.bornga{
       opacity:0;
     }
@@ -166,8 +273,18 @@ export default {
     justify-content: center;
     align-items: center;
     flex-wrap: nowrap;
+    transform: scale(0.9);
+    @media all and (min-width:960px) and (max-height:800px){
+      transform:scale(0.8);
+    }
+    @media all and (max-width:512px){
+      transform: scale(.65);
+    }
     p.description-head{
-      font-family:'Akzidenz-Grotesk'
+      font-family:'Akzidenz-Grotesk';
+      @media all and (max-width:512px){
+        font-size: 80%;
+      }
     }
     h3.bolder{
       font-family:'Akzidenz-Grotesk Pro Med'
@@ -177,7 +294,7 @@ export default {
       background-position:center center;
       width:100%;
       height:0px;
-      padding-bottom:127%;
+      padding-bottom:133%;
       transition: box-shadow 0.3s ease-in-out;
       &.one-and-only{
         &.activate-this{
@@ -195,6 +312,9 @@ export default {
       text-transform:uppercase;
       transition:0.8s;
       border:1px solid #000;
+      @media all and (max-width:512px){
+        font-size:85%;
+      }
       &:hover{
         background-color:#fff;
         color:#000;
@@ -204,5 +324,25 @@ export default {
   }
   .second-page{
     overflow:hidden;
+  }
+  @-webkit-keyframes ShiftingGradient {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+  }
+  @-moz-keyframes ShiftingGradient {
+      0%{background-position:51% 0%}
+      50%{background-position:50% 100%}
+      100%{background-position:51% 0%}
+  }
+  @-o-keyframes ShiftingGradient {
+      0%{background-position:51% 0%}
+      50%{background-position:50% 100%}
+      100%{background-position:51% 0%}
+  }
+  @keyframes ShiftingGradient {
+      0%{background-position:51% 0%}
+      50%{background-position:50% 100%}
+      100%{background-position:51% 0%}
   }
 </style>

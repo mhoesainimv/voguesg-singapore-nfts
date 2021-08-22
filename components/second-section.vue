@@ -1,20 +1,22 @@
 <template>
   <div>
     <div :class="'con-contained ' + view_mode">
-      <div v-if="view_mode == 'Desktop'" class="background-video-image desktop">
-        <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-          <source src="video/the_background_video.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div v-if="view_mode == 'Desktop'" id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
-        <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
-          <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
-          </div>
+      <div v-if="view_mode == 'Desktop'">
+        <div class="background-video-image desktop">
+          <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
+            <source src="video/the_background_video.mp4" type="video/mp4">
+          </video>
         </div>
-        <div class="the-objects">
-          <div v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
-            <div class="the-description" v-html="object.title">
+        <div id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
+          <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+            <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
             </div>
+          </div>
+          <div class="the-objects">
+            <a target="_blank" :href="object.link" v-for="(object,index) of objects" :key="index" :class="'object object-'+index+' '+object.slug">
+              <div class="the-description" v-html="object.title">
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -27,18 +29,20 @@
             <VueSlickCarousel v-bind="settings">
               <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
                 <div class="background-image-slider">
-                  <img style='z-index:-1;position:relative;' class="img-fluid responsive" :src="slide.image_cover"/>
+                  <!-- <img style='z-index:-1;position:relative;' class="img-fluid responsive" :src="slide.image_cover"/> -->
+                  <video  class="video_outside" ref="inside_the_modal_video" autoplay playsinline muted loop :poster="slide.image_cover">
+                    <source :src="slide.video_mobile" type="video/mp4">
+                  </video>
                 </div>
               </div>
             </VueSlickCarousel>
           </div>
         </div>
       </div>
-
       <div v-if="view_mode == 'Mobile'" class="the-objects">
         <div class="container-fluid">
           <div class="row">
-            <div v-for="(object,index) of objects" :key="index" :class="'col-6 m-0 object the-box object-'+index+' '+object.slug">
+            <a :href="object.link" target="_blank" v-for="(object,index) of objects" :key="index" :class="'col-6 m-0 object the-box object-'+index+' '+object.slug">
               <div class="row">
                 <div class="col-12">
                   <div class="background-image-mobile-objects" :style="{ 'background-image': 'url('+ object.image_cover + ')' }">
@@ -51,7 +55,7 @@
                   </span>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -70,6 +74,7 @@ import json from '~/components/json/cover.json'
 import objects from '~/components/json/objects.json'
 
 import sliderModal from '~/components/sliderModal.vue'
+import VogueSingaporeLogo from "~/components/VogueSingaporeLogo.vue"
 
 export default {
   props: {
@@ -79,6 +84,7 @@ export default {
   data(){
 
     return{
+      isActive: false,
       mobile_background:'background-image:url("images/background-positioning-mobile.png")',
       desktop_background:'background-image:url("images/background-positioning.png")',
       view_mode:'Desktop',
@@ -114,7 +120,7 @@ export default {
     }
   },
   components:{
-    VueSlickCarousel,sliderModal
+    VueSlickCarousel,sliderModal,VogueSingaporeLogo
   },
   methods:{
     showModal(i){
@@ -176,18 +182,19 @@ export default {
 <style lang="scss" scoped>
   .con-contained.Desktop{
     .background-video-image{
-      position:relative;
-      width:100vw;
-      height:100vh;
-      height: calc(var(--vh, 1vh) * 100);
-      // min-height: -webkit-fill-available;
+      position: relative;
+      width: 100vw;
+      padding: 0px;
+      margin: 0px;
+      height: auto;
+      display: flex;
       video{
         position: relative;
         width: 100%;
         height: auto;
-        top: 50%;
+        // top: 50%;
         object-fit: contain;
-        transform: translateY(-50%);
+        // transform: translateY(-50%);
       }
     }
     .the-common-ground{
@@ -250,7 +257,10 @@ export default {
           background-position:center center;
         }
       }
+      a{
+      text-decoration:none !important;
       .the-description {
+        color:#000 !important;
         position: relative;
         left: 103%;
         top: 50%;
@@ -262,6 +272,7 @@ export default {
         &.activate{
           opacity:1;
           transition:0.5s;
+        }
         }
       }
       .the-objects{
@@ -332,8 +343,11 @@ export default {
   }
   .con-contained.Mobile{
     .the-objects{
+      text-decoration:none !important;
       background-color: #f3eeec;
       span.mobile-description {
+        text-decoration:none !important;
+        color:#000 !important;
         font-size: 0.6em;
       }
     }
@@ -355,6 +369,7 @@ export default {
       }
     }
     .the-box{
+      text-decoration:none !important;
       padding: 2em;
       border-right: 1px solid grey;
       border-bottom: 1px solid grey;

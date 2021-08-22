@@ -30,7 +30,7 @@
                 <div class="container-fluid">
                   <div class="row">
                     <div class="p-0 col-12">
-                      <video id="zorc_video_modal" class="video_modal" ref="inside_the_modal_video" autoplayplaysinline loop>
+                      <video id="zorc_video_modal" class="video_modal" ref="inside_the_modal_video" autoplay playsinline loop :poster="the_data.image_cover">
                         <source :src="the_data.video" type="video/mp4">
                       </video>
                     </div>
@@ -85,7 +85,7 @@
       <div v-if="the_view_mode == 'Mobile'" class="d-block d-md-none">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-12 mb-3 p-0">
+            <div class="col-12 mb-3 p-0 mt-5 mt-sm-0">
               <button type="button" aria-label="Close" @click="hideModal" class="close">
                   <svg xmlns="http://www.w3.org/2000/svg" width="25.354" height="25.847" viewBox="0 0 25.354 25.847">
                     <line id="Line_16" data-name="Line 16" x2="34.857" transform="translate(0.354 0.354) rotate(45)" fill="none" stroke="#fff" stroke-width="1"/>

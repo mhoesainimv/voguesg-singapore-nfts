@@ -48,7 +48,13 @@ h1,h2,h3,h4,h5,h6{
 p{
   font-family:'Baskerville'
 }
-
+body.modal-open .supreme-container{
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px);
+}
 .cover-the-modal{
   border-radius:0px;
   @media all and (max-width:512px){
@@ -172,5 +178,10 @@ p{
   }
   .hidden {
     visibility: hidden;
+  }
+}
+body.modal-open{
+  .second-page{
+    filter:blur(1px);
   }
 }

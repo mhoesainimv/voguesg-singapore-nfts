@@ -7,14 +7,14 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: 'Vogue Nine Cover | Vogue Singapore',
+    title: 'Vogue Singapore September 2021: New Beginnings',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Insert Description Here' }
+      { hid: 'description', name: 'description', content: "Vogue Singapore's September 2021 issue is dedicated to Non-Fungible Tokens (NFTs), as we explore the creative renaissance born out of digital innovation."}
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/favicon-192.png' }
+      { rel: 'icon', type: 'image/png', href: 'https://mtrphn.com/vogue-singapore-nfts/favicon-192.png' }
     ]
   },
   /*
@@ -25,6 +25,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '~/assets/css/hamburger.css',
     '~/assets/scss/main.scss'
   ],
   /*
@@ -48,7 +49,7 @@ export default {
   ** Build configuration
   */
  router:{
-  base: '/vogue-nine-cover', 
+  base: '/vogue-singapore-nfts/', 
  },
   build: {
     /*

@@ -32,7 +32,7 @@ export default {
     width:30px;
     height:30px;
     border-radius:50%;	
-    background:#fff;
+    background:#d3d1d2;
     opacity:1;			
     z-index:5;
     // box-shadow: 0px 0px 40px 15px rgb(255, 255, 200),
@@ -48,10 +48,11 @@ export default {
     // 0 0 100px 165px rgb(255, 123, 0), 
     // 0 0 100px 200px #fff;  
     // box-shadow: 0 0 50px 30px #fff, 0 0 100px 150px #fff0, 0 0 100px 165px #ffffff, 0 0 100px 200px #fff0;
-    box-shadow:0 0 70px 10px #fff, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #ffffff, 0 0 50px 100px rgb(255 255 255 / 0%);;
+    box-shadow:0 0 70px 10px #d3d1d2, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #d3d1d2, 0 0 50px 100px #d3d1d2;
     &.activate{
-    // box-shadow: 0px 0px 200px 60px yellow;  
-      box-shadow: 0 0 40px 20px #fff, 0 0 100px 50px rgb(255, 174, 0);
+      background:#d3d1d2;
+      box-shadow:0 0 70px 10px #d3d1d2, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #d3d1d2, 0 0 50px 100px #d3d1d2;
+      transition:0.5s;
     }
   }
   .ray_box {

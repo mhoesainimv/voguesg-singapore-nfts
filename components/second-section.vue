@@ -125,7 +125,6 @@ export default {
     showModal(i){
       let index = i;
       let modal_content = this.data[index];
-      this.$refs.inside_the_modal_video.play();
       this.modal_content = modal_content;
       this.showModalcover = true;
     },
@@ -233,27 +232,28 @@ export default {
       .deck{
         &.image-cover-0{
           position: absolute;
-          left: 28.4%;
-          width: 17.0%;
+          left: 25%;
+          width: 18.3%;
           top: 32%;
           height: 45%;
         }
         &.image-cover-1{
           position: absolute;
-          left: 54.3%;
-          width: 17%;
+          left: 56.3%;
+          width: 19%;
           top: 32%;
           height: 45%;
         }
         .background-image-slider{
           background-image:none !important;
-          background-color:rgba(128, 128, 128, 0.055);
-          background-color: rgb(255 143 241 / 80%);
+          // background-color:rgba(128, 128, 128, 0.055);
+          // background-color: rgb(255 143 241 / 80%);
           position: relative;
           width: 100%;
           height: 100%;
           background-size: cover;
           background-position:center center;
+          cursor:pointer;
         }
       }
       a{
@@ -288,7 +288,7 @@ export default {
           position: absolute;
           width: 13%;
           height: 35%;
-          background-color: #00800091;
+          // background-color: #00800091;
           bottom: 4%;
           left: 3%;
         }
@@ -296,7 +296,7 @@ export default {
           position: absolute;
           width: 4.3%;
           height: 15%;
-          background-color: rgba(0,128,0,0.56863);
+          // background-color: rgba(0,128,0,0.56863);
           bottom: 11%;
           left: 22%;
         }
@@ -304,7 +304,7 @@ export default {
           position: absolute;
           width: 4.3%;
           height: 17%;
-          background-color: rgba(0, 128, 0, 0.56863);
+          // background-color: rgba(0, 128, 0, 0.56863);
           bottom: 9%;
           left: 35%;
         }
@@ -312,7 +312,7 @@ export default {
           position: absolute;
           width: 4.3%;
           height: 15%;
-          background-color: rgba(0, 128, 0, 0.56863);
+          // background-color: rgba(0, 128, 0, 0.56863);
           bottom: 7%;
           left: 61%;
         }
@@ -320,7 +320,7 @@ export default {
           position: absolute;
           width: 10.3%;
           height: 10%;
-          background-color: rgba(0, 128, 0, 0.56863);
+          // background-color: rgba(0, 128, 0, 0.56863);
           bottom: 2%;
           left: 73.3%;
         }
@@ -328,13 +328,12 @@ export default {
           position: absolute;
           width: 6.3%;
           height: 29%;
-          background-color: rgba(0, 128, 0, 0.56863);
+          // background-color: rgba(0, 128, 0, 0.56863);
           bottom: 11%;
           right: 5.5%;
           .the-description {
           position: relative;
-          right: 225%;
-          left:auto;
+          left: -190%;
           }
         }
       }
@@ -425,7 +424,16 @@ export default {
     }
     
   } 
-  @media all and (min-aspect-ratio: 8/5) and (max-aspect-ratio:8/5){
-
+  @media all and (orientation: landscape) and (min-aspect-ratio: 8/5){
+    .con-contained.Desktop {
+      .background-video-image{
+        > video{
+          height:100%;
+          height: 100vh;
+          object-fit: cover;
+          object-position:bottom;
+        }
+      }
+    }
   }
 </style>

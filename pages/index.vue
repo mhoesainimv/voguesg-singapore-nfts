@@ -16,7 +16,7 @@
               <div class="headline cover one-and-only" style="position:relative;">
                 <div class="video first-headline">
                   <video id="the_first_video" ref="the_first_video" playsinline muted>
-                    <source src="video/VOGUE_NFT_COVER_SHINE_FLOW_V2.mp4" type="video/mp4">
+                    <source src="video/VOGUE_NFT_COVER_SHINE_FLOW_V4.mp4" type="video/mp4">
                   </video>
                   <theSun id='the-brightness' class="sun_will_animate" />
                 </div>
@@ -151,7 +151,7 @@ export default {
       },6);
       tl.to('.first-page .bornga', {
         opacity: 1,
-        stagger: 0.5,
+        stagger: 0.6,
         y:0,
         onComplete:function(){
         }
@@ -159,7 +159,7 @@ export default {
     },
     triggerMeTransition(){
       let video = document.getElementById("the_first_video");
-      video.play();
+      // video.play();
       this.triggerSecondPage = true;
       var tl = gsap.timeline();
       tl.to('.first-page', 2,{
@@ -176,10 +176,10 @@ export default {
           gsap.to('.omerta_footer svg',1,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
         }
       });
-      var tl2 = gsap.timeline().delay(0.75);
+      var tl2 = gsap.timeline().delay(0.3);
       document.querySelector(".headline.cover.one-and-only").classList.add('activate-this');
       tl2.to('.sun_will_animate',2,{
-        opacity:1,scaleX:12, scaleY:12, ease: Power2.easeOut,
+        opacity:1,scaleX:3, scaleY:3, ease: Power2.easeOut,
         onComplete:function(){
           document.querySelector(".headline.cover.one-and-only").classList.remove('activate-this');
           gsap.to('.sun_will_animate',0.5,{ width:'100%', height:'100%', ease: Power2.easeOut}).delay(1);
@@ -249,7 +249,7 @@ export default {
       height:100vh;
       height: calc(var(--vh, 1vh) * 100);
     }
-    @media all and (max-width:1350px) and (min-width:512px) and (min-height:800px){
+    @media all and (max-width:1350px) and (min-width:512px) and (min-height:767px){
       flex-flow: column;
       display:flex;
     }
@@ -345,6 +345,7 @@ export default {
       height:0px;
       padding-bottom:133%;
       transition: box-shadow 0.3s ease-in-out;
+      overflow:hidden;
       &.one-and-only{
         &.activate-this{
           box-shadow: 0px 0px 40px 20px rgb(255, 255, 255);
@@ -384,6 +385,7 @@ export default {
   .omerta_footer{
     overflow:hidden;
     background-color:#FEDC7B;
+    flex:1 1 auto;
     .table-positioning-logo{
       display: flex;
       align-items: center;
@@ -401,10 +403,7 @@ export default {
     display: flex;
     justify-content: center;
     @media all and (max-width:1350px) and (min-height:850px){
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex:1 1 auto;
+
     }
     @media all and (max-width:512px){
       display:none;
@@ -495,6 +494,15 @@ export default {
       transition:0.5s;
       opacity:1;
     }
-    
+  }
+  @media all and (orientation: landscape) and (min-aspect-ratio: 8/5) {
+   .omerta_footer{
+      display:none;
+    }
+    .the-navbar{
+      .a.the-logo{
+        display:flex;
+      }
+    }
   }
 </style>

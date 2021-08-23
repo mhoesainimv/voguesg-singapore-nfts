@@ -29,10 +29,10 @@ export default {
     right:0;
     bottom:0;
     margin: auto;  
-    width:30px;
-    height:30px;
+    width:1px;
+    height:1px;
     border-radius:50%;	
-    background:#d3d1d2;
+    background:#fff;
     opacity:1;			
     z-index:5;
     // box-shadow: 0px 0px 40px 15px rgb(255, 255, 200),
@@ -48,7 +48,9 @@ export default {
     // 0 0 100px 165px rgb(255, 123, 0), 
     // 0 0 100px 200px #fff;  
     // box-shadow: 0 0 50px 30px #fff, 0 0 100px 150px #fff0, 0 0 100px 165px #ffffff, 0 0 100px 200px #fff0;
-    box-shadow:0 0 70px 10px #d3d1d2, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #d3d1d2, 0 0 50px 100px #d3d1d2;
+    // box-shadow:0 0 70px 10px #d3d1d2, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #d3d1d2, 0 0 50px 100px #d3d1d2;
+    // box-shadow:0 0 70px 10px #ffffff, 0 0 50px 50px #ffffff00, 0 0 50px 50px #ffffff, 0px 0px 30px 100px #d3d1d2;
+    box-shadow:0 0 70px 10px #ffffff, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #fff, 0px 0px 30px 100px #e9d78a;
     &.activate{
       background:#d3d1d2;
       box-shadow:0 0 70px 10px #d3d1d2, 0 0 50px 50px rgb(255 255 255 / 0%), 0 0 50px 50px #d3d1d2, 0 0 50px 100px #d3d1d2;

@@ -4,7 +4,7 @@
     "slug":"pillar",
     "title":"<i>Vogue</i> conversations: What is the value of fashion NFTs?",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image_cover":"images/800x800.png",
+    "image_cover":"images/objects/Column.png",
     "link" : "https://vogue.sg/vogue-conversations-nft/"
   },
   {
@@ -12,7 +12,7 @@
     "slug":"candle",
     "title":"Discover the Balmain digital-only dress created exclusively for <i>Vogue</i> Singapore",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image_cover":"images/800x800.png",
+    "image_cover":"images/objects/candle.png",
     "link" : "https://vogue.sg/balmain-nft/"
   },
   {
@@ -20,7 +20,7 @@
     "slug":"vase",
     "title":"Explore an eternal flowering vase that blooms with each sunrise",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image_cover":"images/800x800.png",
+    "image_cover":"images/objects/Vase.png",
     "link" : "https://vogue.sg/lanzavecchia-wai-nft/"
   },
   {
@@ -28,7 +28,7 @@
     "slug":"thread_needle",
     "title":"Try on the digital headdress created by The Fabricant",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image_cover":"images/800x800.png",
+    "image_cover":"images/objects/Spool.png",
     "link" : "https://vogue.sg/the-fabricant-instagram-filter/"
   },
   {
@@ -36,7 +36,7 @@
     "slug":"canvas",
     "title":"Watch artist Dain Yoon transform herself with surreal make-up",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image_cover":"images/800x800.png",
+    "image_cover":"images/objects/color_palette.png",
     "link" : "https://vogue.sg/dain-yoon-nft/"
   },
   {
@@ -44,7 +44,7 @@
     "slug":"violin",
     "title":"48 local performers create a bespoke piece of work for Vogue Singapore inspired by our 'New Beginnings' theme",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "image_cover":"images/800x800.png",
+    "image_cover":"images/objects/Violin.png",
     "link" : "https://vogue.sg/rhythm-of-singapore/"
   }
 ]

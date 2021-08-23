@@ -55,6 +55,13 @@ body.modal-open .supreme-container{
   -ms-filter: blur(1px);
   filter: blur(1px);
 }
+#modal-xl{
+  .modal-xl{
+    @media all and (min-width:1240px){
+      max-width:90% !important;
+    }
+  }
+}
 .cover-the-modal{
   border-radius:0px;
   @media all and (max-width:512px){
@@ -186,6 +193,11 @@ body.modal-open .supreme-container{
   }
   .hidden {
     visibility: hidden;
+  }
+  @media all and (min-width:1024px){
+    .modal-xl {
+      max-width: 90%;
+    } 
   }
 }
 body.modal-open{

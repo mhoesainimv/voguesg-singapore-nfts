@@ -27,10 +27,9 @@
         <div v-if="view_mode == 'Mobile'" id="the_constantine" style="" class="the-common-ground mobile">
           <div class="positioning-carousel">
             <VueSlickCarousel v-bind="settings">
-              <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
+              <div @click="showModal(index)" v-for="(slide,index) of data" :key="index">
                 <div class="background-image-slider">
-                  <!-- <img style='z-index:-1;position:relative;' class="img-fluid responsive" :src="slide.image_cover"/> -->
-                  <video  class="video_outside" ref="inside_the_modal_video" autoplay playsinline muted loop :poster="slide.image_cover">
+                  <video  class="video_outside" ref="inside_the_modal_video" autoplay playsinline muted loop>
                     <source :src="slide.video_mobile" type="video/mp4">
                   </video>
                 </div>
@@ -126,6 +125,7 @@ export default {
     showModal(i){
       let index = i;
       let modal_content = this.data[index];
+      this.$refs.inside_the_modal_video.play();
       this.modal_content = modal_content;
       this.showModalcover = true;
     },
@@ -159,7 +159,6 @@ export default {
   },
   mounted:function(){
     gsap.set('.positioning-carousel',{opacity:0});
-    console.log(this.view_mode);
     this.onResize();
     if(this.view_mode == 'Desktop'){
       this.$refs.this_video.play();
@@ -187,7 +186,7 @@ export default {
       padding: 0px;
       margin: 0px;
       height: auto;
-      display: flex;
+      display: grid;
       video{
         position: relative;
         width: 100%;
@@ -359,13 +358,31 @@ export default {
       width: 100%;
       height: 0px;
       padding-bottom: 148%;
-      video{
+      > video{
         position: relative;
+        display:table;
         width: 100%;
         height: auto;
         top: 0%;
         object-fit: contain;
         transform: translateY(0);
+      }
+    }
+    .background-image-slider{
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 0px;
+      padding-bottom: 122%;
+      background-size: cover;
+      background-position: center center;
+      > video{
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
       }
     }
     .the-box{
@@ -406,19 +423,9 @@ export default {
         left: 25%;
       }
     }
-    .background-image-slider{
-      background-color:rgba(128, 128, 128, 0.055);
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position:center center;
-      img{
-        pointer-events: none;
-      }
-    }
-    .positioning-carousel {
-      height: 500px;
-    }
+    
   } 
+  @media all and (min-aspect-ratio: 8/5) and (max-aspect-ratio:8/5){
+
+  }
 </style>

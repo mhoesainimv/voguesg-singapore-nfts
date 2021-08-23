@@ -132,6 +132,9 @@ body.modal-open .supreme-container{
   }
   video#zorc_video_modal {
     width: 100%;
+    display: table;
+    height: 100%;
+    position: relative;
   }
   button.speaker{
     border:0px;
@@ -139,6 +142,11 @@ body.modal-open .supreme-container{
     &.to_video{
       width:37px;
       height:37px;
+      @media all and (max-width:512px){
+        width: 37px;
+        height: auto;
+        padding: 7px;
+      }
       svg.muted{
         display:none;
       }

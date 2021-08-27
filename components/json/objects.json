@@ -2,6 +2,7 @@
   {
     "id": "0",
     "slug":"pillar",
+    "short_title" : "<i>Vogue</i> conversations: What is the value of fashion NFTs?",
     "title":"<i>Vogue</i> conversations: What is the value of fashion NFTs?",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/objects/Column.png",
@@ -10,6 +11,7 @@
   {
     "id": "1",
     "slug":"candle",
+    "short_title" : "Balmain and beyond: 'Flame Dress'",
     "title":"Discover the Balmain digital-only dress created exclusively for <i>Vogue</i> Singapore",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/objects/candle.png",
@@ -18,6 +20,7 @@
   {
     "id": "2",
     "slug":"vase",
+    "short_title" : "Beauty in perpetuity: 'Living Vase 01'",
     "title":"Explore an eternal flowering vase that blooms with each sunrise",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/objects/Vase.png",
@@ -26,14 +29,16 @@
   {
     "id": "3",
     "slug":"thread_needle",
+    "short_title" : "Instagram headdress filter",
     "title":"Try on the digital headdress created by The Fabricant",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/objects/Spool.png",
-    "link" : "https://vogue.sg/the-fabricant-instagram-filter/"
+    "link" : "/vogue-singapore-nfts/the-fabricant-instagram-filter"
   },
   {
     "id": "4",
     "slug":"canvas",
+    "short_title" : "Sun in Virgo: Dain Yoon's surreal make-up",
     "title":"Watch artist Dain Yoon transform herself with surreal make-up",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/objects/color_palette.png",
@@ -42,7 +47,8 @@
   {
     "id": "5",
     "slug":"violin",
-    "title":"48 local performers create a bespoke piece of work for Vogue Singapore inspired by our 'New Beginnings' theme",
+    "short_title" : "'The Rhythm of Singapore' project",
+    "title":"48 local performers create a bespoke piece of work for <i>Vogue</i> Singapore inspired by our 'New Beginnings' theme",
     "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     "image_cover":"images/objects/Violin.png",
     "link" : "https://vogue.sg/rhythm-of-singapore/"

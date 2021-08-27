@@ -1,31 +1,32 @@
 <template>
-  <div :class="isActive == true ? 'overflow-lock':''">
+  <div @keyup.enter="doSomething" :class="isActive == true ? 'overflow-lock':''">
     <div id="45_nods_" :class="'the-contained '+ view_mode">
       <div id="first-introismo" class="the-intro">
         <div class="position-absolute">
-          <div class="the-intro-text first">A new dawn for fashion lies in technology</div>
+          <div class="d-table d-sm-none the-intro-text first text-center m-auto">A new dawn for fashion lies<br/> in technology</div>
+          <div class="d-none d-sm-table the-intro-text first text-center m-auto">A new dawn for fashion lies in technology</div>
         </div>
         <div class="position-absolute">
-          <div class="the-intro-text second">Enter the metaverse</div>
+          <div class="the-intro-text second text-center m-auto">Enter the metaverse</div>
         </div>
       </div>
       <div class="first-page">
         <div id="45_nods_1" class="container">
           <div class="row">
-            <div class="col-xl-4 col-lg-4 col-md-3 col-sm-6 mt-4 mx-auto d-table text-center">
-              <div class="headline cover one-and-only" style="position:relative;">
+            <div class="col-9 col-xl-4 col-lg-4 col-md-3 col-sm-6 mt-4 mx-auto d-table text-center">
+              <div id="triggerHeadline" :class="{'activate-this':triggerSecondPage}" class="headline cover one-and-only" style="position:relative;">
                 <div class="video first-headline">
                   <video id="the_first_video" ref="the_first_video" playsinline muted>
-                    <source src="video/VOGUE_NFT_COVER_SHINE_FLOW_V4.mp4" type="video/mp4">
+                    <source src="https://vogue-singapore.s3.amazonaws.com/video/vogue-singapore-nfts/VOGUE_NFT_COVER_SHINE_FLOW_V4.mp4" type="video/mp4">
                   </video>
+                  <div class="the-text-new-beginning bornga">New Beginnings</div>
                   <theSun id='the-brightness' class="sun_will_animate" />
                 </div>
-                <div class="the-text-new-beginning bornga">New Beginnings</div>
               </div>
             </div>
           </div>
           <div class=" bornga row mt-4 align-content-center justify-content-center mb-2">
-            <div class="col-md-10 text-center">
+            <div class="col-md-10 col-12 text-center">
               <p class="description-head">
                 As part of the global theme of 'New Beginnings' for September, <i>Vogue</i> Singapore explores the creative renaissance born out of digital innovation with an issue dedicated to Non-Fungible Tokens (NFTs). 
               </p>
@@ -48,7 +49,7 @@
       </div>
       <div class="the-navbar w-100 fronthold-canvas " :class="+ triggerSecondPage == true ? 'activated' : ''">
         <div class="a the-logo">
-          <a href="https://vogue.sg" target="_blank">
+          <a href="https://vogue.sg/" target="_blank">
             <VogueSingaporeLogo/>
           </a>
         </div>
@@ -63,9 +64,9 @@
       </div>
       <div v-if="view_mode == 'Desktop'" class="omerta_footer">
         <div class="table-positioning-logo">
-          <a href="https://vogue.sg" target="_blank">
-            <VogueSingaporeLogo/>
-          </a>
+          <NuxtLink to="/">
+            <VogueSingaporeLogoFooter/>
+          </NuxtLink>
         </div>
       </div>
       <div v-if="triggerSecondPage" class="the-menu vogue nft" :class="{'is-active': isActive}">
@@ -80,14 +81,16 @@ import {gsap, Power2,Power4,Power3} from "gsap";
 import secondSection from "~/components/second-section.vue"
 import theSun from "~/components/the-sun.vue"
 import VogueSingaporeLogo from "~/components/VogueSingaporeLogo.vue"
+import VogueSingaporeLogoFooter from "~/components/VogueSingaporeLogoFooter.vue"
 import CanvasMenu from "~/components/Canvasmenu.vue"
-
+import someSound from "~/assets/audio/whoosh.mp3"
 export default {
   data(){
     return{
       isActive: false,
       view_mode:'Desktop',
       triggerSecondPage: false,
+      someSound: someSound,
       window: {
         width: 0,
         height: 0
@@ -96,7 +99,7 @@ export default {
     }
   },
   components: {
-    secondSection,theSun,VogueSingaporeLogo,CanvasMenu
+    secondSection,theSun,VogueSingaporeLogo,CanvasMenu,VogueSingaporeLogoFooter
   },
   methods:{
     onCanvas: function() {
@@ -128,17 +131,17 @@ export default {
         opacity:0,
         onComplete:function(){
         }
-      },2);
+      },4);
       tl.to('.the-intro-text.second',{
         opacity:1,
         onComplete:function(){
         }
-      },3);
+      },5);
       tl.to('.the-intro-text.second',{
         opacity:0,
         onComplete:function(){
         }
-      },5);
+      },7);
       tl.to('.the-intro',{
         opacity:0,
         onComplete:function(){
@@ -148,22 +151,30 @@ export default {
             video.pause();
           },3900);
         }
-      },6);
+      },8);
       tl.to('.first-page .bornga', {
         opacity: 1,
-        stagger: 0.6,
+        stagger: 1,
         y:0,
         onComplete:function(){
         }
-      },8);
+      },9);
     },
     triggerMeTransition(){
-      let video = document.getElementById("the_first_video");
+      // let video = document.getElementById("the_first_video");
       // video.play();
+      let note = new Audio(this.someSound);
+      note.addEventListener("canplaythrough", () => { 
+        note.play();
+      });
       this.triggerSecondPage = true;
+      // let cover_is_cover = document.getElementById("triggerHeadline");
+      // cover_is_cover.classList.add('activate-this');
+        var scale_x = 4;
+        var scale_y = 4;
       var tl = gsap.timeline();
-      tl.to('.first-page', 2,{
-        scaleX:10, scaleY:10, opacity:1,ease: Power3.easeIn,
+      tl.to('.first-page', 0.5,{
+        scaleX:scale_x, scaleY:scale_y, opacity:1,ease: Power3.easeIn,
         onStart:function(){
           document.getElementById('45_nods_1').classList.add('change_background');
           // document.getElementById('45_nods').classList.add('change_background');
@@ -171,33 +182,33 @@ export default {
         onComplete:function(){
           // document.getElementById("the-brightness").classList.add('activate');
           gsap.set('.first-page',{ opacity:0, scaleX:0, scaleY:0});
-          gsap.to('.second-page',1,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
-          gsap.to('.omerta_footer',1,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
-          gsap.to('.omerta_footer svg',1,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
+          gsap.to('.second-page',.3,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
+          gsap.to('.omerta_footer',.3,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
+          gsap.to('.omerta_footer svg',.5,{ opacity:1, scaleX:1, scaleY:1,ease: Power2.easeOut});
         }
       });
       var tl2 = gsap.timeline().delay(0.3);
-      document.querySelector(".headline.cover.one-and-only").classList.add('activate-this');
-      tl2.to('.sun_will_animate',2,{
+      tl2.to('.sun_will_animate',0.5,{
         opacity:1,scaleX:3, scaleY:3, ease: Power2.easeOut,
         onComplete:function(){
-          document.querySelector(".headline.cover.one-and-only").classList.remove('activate-this');
           gsap.to('.sun_will_animate',0.5,{ width:'100%', height:'100%', ease: Power2.easeOut}).delay(1);
           gsap.to('.fronthold-canvas',{opacity:1}).delay(1);
-          setTimeout(function(){
-            let video = document.getElementById("the_benchmark");
-            let video_height = video.clientHeight;
-            if(this.window.width < 512){
-              this.view_mode = 'Mobile';
-            } else {
-              this.view_mode = 'Desktop';
-            }
-            this.the_responsive = this.view_mode;
-            document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-          },10);
+            // let video = document.getElementById("the_benchmark");
+
+            // if(this.window.width < 512){
+            //   this.view_mode = 'Mobile';
+            // } else {
+            //   this.view_mode = 'Desktop';
+            // }
+            // this.the_responsive = this.view_mode;
+            // if(video){
+            //   console.log(video);
+            // let video_height = video.clientHeight;
+            // document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+            // }
           }
       });
-    }
+      }
   },
   mounted:function(){
     gsap.set('.fronthold-canvas',{opacity:0});
@@ -211,10 +222,13 @@ export default {
     // this.welcomeEntry();
     this.firstIntro();
     if (process.browser) {
+        // console.log(this.window.width);
     }
     this.$nextTick(function () {
-      let video = document.getElementById("the_first_video");
-      window.addEventListener('resize', this.onResize);
+      // let video = document.getElementById("the_first_video");
+      // if(this.view_mode == 'Desktop'){
+      //   window.addEventListener('resize', this.onResize);
+      // }
       // video.addEventListener("timeupdate", function(){
       //   if(this.currentTime >= 1.9) {
       //     console.log('hello');
@@ -242,6 +256,7 @@ export default {
     background-color:#f3eeec;
     width:100%;
     height:100vh;
+    height: calc(var(--vh, 1vh) * 100);
     min-height: -webkit-fill-available;
     @media all and (min-width:512px){
       overflow-x:hidden !important;
@@ -249,7 +264,7 @@ export default {
       height:100vh;
       height: calc(var(--vh, 1vh) * 100);
     }
-    @media all and (max-width:1350px) and (min-width:512px) and (min-height:767px){
+    @media all and (max-width:1450px) and (min-width:512px) and (min-height:700px){
       flex-flow: column;
       display:flex;
     }
@@ -257,7 +272,12 @@ export default {
       background-color:#fff;
       transition:1s;
     }
+    @media all and (max-width:512px){
+      height:100%;
+      min-height: -webkit-fill-available;
+    }
   }
+  
   .the-intro{
     position:absolute;
     z-index:56;
@@ -281,9 +301,12 @@ export default {
     .the-intro-text{
       opacity:0;
       font-family: 'Akzidenz-Grotesk';
-      font-size: 1.3em;
+      font-size: 2em;
+      @media all and (min-width:1350px){
+        font-size:2em;
+      }
       @media all and (max-width:512px){
-        font-size: 0.7em;
+        font-size: 1.5em;
         text-align: center;
         display: table;
       }
@@ -307,15 +330,20 @@ export default {
       font-size: 77%;
       text-transform: uppercase;
       opacity:0;
+      @media all and (max-width:512px){
+        font-size: .5em;
+      }
     }
     .row.bornga{
       opacity:0;
     }
     position: absolute;
     z-index:55;
-    width: 100vw;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
+    // width: 100vw;
+    // height: 100vh;
+    // height: calc(var(--vh, 1vh) * 100);
+    width:100vw;
+    height:100%;
     min-height: -webkit-fill-available;
     display: flex;
     align-content: center;
@@ -327,13 +355,22 @@ export default {
       transform:scale(0.8);
     }
     @media all and (max-width:512px){
-      transform: scale(.65);
+      transform: scale(1);
     }
     p.description-head{
       font-family:'Akzidenz-Grotesk';
-      @media all and (max-width:512px){
-        font-size: 80%;
+      @media all and (min-width:1024px){
+        font-size:1.3em;
       }
+      @media all and (max-width:512px){
+        font-size: 65%;
+      }
+      @media only screen 
+        and (device-width: 428px) 
+        and (device-height: 926px) 
+        and (-webkit-device-pixel-ratio: 3) { 
+          font-size:80%;
+        }
     }
     h3.bolder{
       font-family:'Akzidenz-Grotesk Pro Med'
@@ -345,12 +382,17 @@ export default {
       height:0px;
       padding-bottom:133%;
       transition: box-shadow 0.3s ease-in-out;
-      overflow:hidden;
-      &.one-and-only{
-        &.activate-this{
-          box-shadow: 0px 0px 40px 20px rgb(255, 255, 255);
-          transition: box-shadow 1.5s ease-in-out;
-        }
+      box-shadow: 0 0 0px 0px #ffffff, 0 0 0px 0px rgb(255 255 255 / 0%), 0 0 0px 0px #fff, 0px 0px 0px 0px #e9d78a;
+      // &.one-and-only{
+      //   &.activate-this{
+      //     // @media all and (min-width:512px){
+      //     //   box-shadow: 0 0 0px 0px #ffffff, 0 0 0px 0px rgb(255 255 255 / 0%), 0 0 0px 0px #fff, 0px 0px 300px 100px #e9d78a;
+      //     //   transition: box-shadow 3s ease-in-out;
+      //     // }
+      //   }
+      // }
+      @media all and (min-width:512px){
+        // overflow:hidden;
       }
     }
     button.click-me-to-enter {
@@ -363,7 +405,7 @@ export default {
       transition:0.8s;
       border:1px solid #000;
       @media all and (max-width:512px){
-        font-size:85%;
+        font-size:80%;
       }
       &:hover{
         background-color:#fff;
@@ -384,7 +426,7 @@ export default {
   }
   .omerta_footer{
     overflow:hidden;
-    background-color:#FEDC7B;
+    background-color:#000;
     flex:1 1 auto;
     .table-positioning-logo{
       display: flex;
@@ -395,6 +437,7 @@ export default {
       flex-wrap: nowrap;
       svg{
         width: 200px;
+        fill:#fff;
       }
     }
     position: relative;

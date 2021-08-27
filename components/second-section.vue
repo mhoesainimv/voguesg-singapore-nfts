@@ -4,10 +4,10 @@
       <div v-if="view_mode == 'Desktop'">
         <div class="background-video-image desktop">
           <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-            <source src="video/the_background_video.mp4" type="video/mp4">
+            <source src="https://vogue-singapore.s3.amazonaws.com/video/vogue-singapore-nfts/the_background_video.mp4" type="video/mp4">
           </video>
         </div>
-        <div id="the_constantine" style="height:var(--the_height)" class="the-common-ground desktop">
+        <div id="the_constantine" style="height:100vh;" class="the-common-ground desktop">
           <div @click="showModal(index)" v-for="(slide,index) of data" :key="index" :class="'deck image-cover-'+index">
             <div class="background-image-slider" :style="{ 'background-image': 'url('+ slide.image_cover + ')' }">
             </div>
@@ -22,11 +22,15 @@
       </div>
       <div v-if="view_mode == 'Mobile'" class="background-video-image mobile" style="">
         <video id="the_benchmark" ref="this_video" autoplay playsinline muted loop>
-          <source src="video/the_background_video_mobile.mp4" type="video/mp4">
+          <source src="https://vogue-singapore.s3.amazonaws.com/video/vogue-singapore-nfts/the_background_video_mobile.mp4" type="video/mp4">
         </video>
         <div v-if="view_mode == 'Mobile'" id="the_constantine" style="" class="the-common-ground mobile">
           <div class="positioning-carousel">
-            <VueSlickCarousel v-bind="settings">
+            <div class="the-contained-arrows">
+              <button @click="showNext" class="icon-next-1 next"></button>
+              <button @click="showPrev" class="icon-next-1 previous"></button>
+            </div>
+            <VueSlickCarousel v-bind="settings" ref="carousel">
               <div @click="showModal(index)" v-for="(slide,index) of data" :key="index">
                 <div class="background-image-slider">
                   <video  class="video_outside" ref="inside_the_modal_video" autoplay playsinline muted loop>
@@ -50,7 +54,7 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <span class="mobile-description" style="font-family:'Baskerville;text-align:center;display:table;" v-html="object.title">
+                  <span class="mobile-description" style="font-family:'Akzidenz-Grotesk';text-align:center;display:table;margin:0 auto;" v-html="object.short_title">
                   </span>
                 </div>
               </div>
@@ -98,7 +102,8 @@ export default {
           breakpoint: 512,
           settings:{
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            arrows:false,
             }
           }
         ]
@@ -113,6 +118,7 @@ export default {
       },
       hoverStateDescription:false,
       data: json,
+      data_reverse: json.reverse(),
       objects: objects,
       modal_content : '',
       showModalcover: false
@@ -122,6 +128,12 @@ export default {
     VueSlickCarousel,sliderModal,VogueSingaporeLogo
   },
   methods:{
+    showNext(){
+      this.$refs.carousel.next();
+    },
+    showPrev(){
+      this.$refs.carousel.prev();
+    },
     showModal(i){
       let index = i;
       let modal_content = this.data[index];
@@ -139,41 +151,57 @@ export default {
       } else {
         this.view_mode = 'Desktop';
       }
+      if(this.window.width > 1024){
       // Directive interpolar changes for mobile data
         let video = document.getElementById("the_benchmark");
         let video_height = video.clientHeight;
-      let vh = window.innerHeight * 0.01;
-      setTimeout(function(){
-          document.documentElement.style.setProperty('--vh', `${vh}px`);
-          document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-      },1500);
-    },
+        let vh = window.innerHeight * 0.01;
+        setTimeout(function(){
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+        },1500);
+      }
+    }
   },
   created:function(){
     if(this.view_mode == 'Desktop' && process.client){
       let video = document.getElementById("the_benchmark");
-      let video_height = video.clientHeight;
-      document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+      if(video){
+        let video_height = video.clientHeight;
+        document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+      }
     }
   },
   mounted:function(){
     gsap.set('.positioning-carousel',{opacity:0});
-    this.onResize();
     if(this.view_mode == 'Desktop'){
       this.$refs.this_video.play();
-    }
-     if (process.client) {
       this.onResize();
-      let video = document.getElementById("the_benchmark");
-      let video_height = video.clientHeight;
-      setTimeout(function(){
-      document.documentElement.style.setProperty('--the_height', `${video_height}px`);
-      },1500);
+    }
+    if (process.client) {
+      if(this.view_mode == 'Desktop'){
+        this.onResize();
+        let video = document.getElementById("the_benchmark");
+        let video_height = video.clientHeight;
+        setTimeout(function(){
+        document.documentElement.style.setProperty('--the_height', `${video_height}px`);
+        },1500);
+      }
     }
     this.$nextTick(function () {
-      this.onResize();
+      if(this.view_mode == 'Desktop'){
+        this.onResize();
+      }
+       window.addEventListener('keydown',function(e){
+        if (e.code == 'Space') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      });
     });
-    window.addEventListener('resize', this.onResize);
+    if(this.view_mode == 'Desktop'){
+      window.addEventListener('resize', this.onResize);
+    }
   }
 }
 </script>
@@ -232,15 +260,16 @@ export default {
       .deck{
         &.image-cover-0{
           position: absolute;
-          left: 25%;
-          width: 18.3%;
+          left: 56.3%;
+          width: 19%;
           top: 32%;
           height: 45%;
+
         }
         &.image-cover-1{
           position: absolute;
-          left: 56.3%;
-          width: 19%;
+          left: 25%;
+          width: 18.3%;
           top: 32%;
           height: 45%;
         }
@@ -267,6 +296,7 @@ export default {
         transform: translateY(-50%);
         width:200px;
         opacity:0;
+        font-size:70%;
         transition:0.5s;
         &.activate{
           opacity:1;
@@ -291,14 +321,25 @@ export default {
           // background-color: #00800091;
           bottom: 4%;
           left: 3%;
+          .the-description{
+            left: 65%;
+            top: -12%;
+            transform: translateY(-50%) translateX(-50%);
+          }
         }
         .object-1{
           position: absolute;
-          width: 4.3%;
+          width: 8.3%;
           height: 15%;
-          // background-color: rgba(0,128,0,0.56863);
           bottom: 11%;
-          left: 22%;
+          left: 19%;
+          .the-description{
+            left: 0%;
+            top: 100%;
+            font-family: "Akzidenz-Grotesk";
+            transform: translateY(0%);
+            font-size: 70%;
+          }
         }
         .object-2{
           position: absolute;
@@ -307,6 +348,11 @@ export default {
           // background-color: rgba(0, 128, 0, 0.56863);
           bottom: 9%;
           left: 35%;
+          .the-description{
+            left: 103%;
+            top: 50%;
+            transform: translateY(-50%);
+          }
         }
         .object-3{
           position: absolute;
@@ -315,6 +361,12 @@ export default {
           // background-color: rgba(0, 128, 0, 0.56863);
           bottom: 7%;
           left: 61%;
+          .the-description{
+            left: -175px;
+            top: 50%;
+            font-family: "Akzidenz-Grotesk";
+            transform: translateY(-50%);
+          }
         }
         .object-4{
           position: absolute;
@@ -323,6 +375,12 @@ export default {
           // background-color: rgba(0, 128, 0, 0.56863);
           bottom: 2%;
           left: 73.3%;
+          .the-description{
+            left: 0%;
+            top: -25%;
+            font-family: "Akzidenz-Grotesk";
+            transform: translateY(-50%);
+          }
         }
         .object-5{
           position: absolute;
@@ -332,8 +390,9 @@ export default {
           bottom: 11%;
           right: 5.5%;
           .the-description {
-          position: relative;
-          left: -190%;
+            left: -100px;
+            top: -40%;
+            transform: translateY(0%);
           }
         }
       }
@@ -393,12 +452,12 @@ export default {
         border-right:0px;
       }
       .background-image-mobile-objects {
-        width: 50%;
+        width: 100%;
         height: 0px;
-        padding-bottom: 50%;
+        padding-bottom: 100%;
         display: table;
         margin: 0 auto;
-        margin-bottom: 1.5em;
+        margin-bottom: .5em;
         background-size: cover;
         background-position: center center;
       }
